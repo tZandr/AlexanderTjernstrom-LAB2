@@ -1,7 +1,15 @@
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+import exercisesRouter from './routes/exercises.js';
+import workoutsRouter from './routes/workouts.js';
+import profileRouter from './routes/profile.js';
 import { uploadRouter } from './routes/upload.js';
+
+dotenv.config();
 
 const app = express();
 const PORT = 3001;
@@ -9,8 +17,16 @@ const PORT = 3001;
 app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json());
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
+
+app.use('/api/exercises', exercisesRouter);
+app.use('/api/workouts', workoutsRouter);
+app.use('/api/profile', profileRouter);
 app.use('/api', uploadRouter);
 
-app.listen(PORT, () => {
-  console.log(`Backend running at http://localhost:${PORT}`);
-});
+mongoose
+  .connect(process.env.MONGO_URI!)
+  .then(() => {
+    console.log('Connected to MongoDB');
+    app.listen(PORT, () => console.log(`Backend running at http://localhost:${PORT}`));
+  })
+  .catch((err) => console.error('MongoDB connection error:', err));
