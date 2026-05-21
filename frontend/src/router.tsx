@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
         element: <Workouts />
       },
       {
-        path: '/active-workout',
+        path: '/workouts/:id',
         element: <ActiveWorkout />
       }
     ],

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getWorkouts } from '../api/Workouts';
+import { getWorkouts } from '../api/workouts';
 import type { IWorkout } from '../types/Workout';
 
 export function useWorkouts() {
