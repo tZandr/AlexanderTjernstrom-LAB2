@@ -1,0 +1,101 @@
+import { uploadAvatar, updateProfile } from '../api/Profile';
+import { useProfile } from '../hooks/useProfile';
+import { useState, useEffect } from 'react';
+import { FaUser } from 'react-icons/fa';
+
+export default function EditProfile({ onSaved }: { onSaved?: () => void }) {
+  const { profile, setProfile } = useProfile();
+  const [name, setName] = useState<string>('');
+  const [age, setAge] = useState<number>(0);
+  const [file, setFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (profile) {
+      setName(profile.name ?? '');
+      setAge(profile.age ?? 0);
+    }
+  }, [profile]);
+
+  const handleUpload = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+
+    try {
+      let avatarUrl = profile?.avatarUrl ?? null;
+      if (file) {
+        const result = await uploadAvatar(file);
+        avatarUrl = result.url;
+      }
+      const updated = await updateProfile({ name, age, avatarUrl });
+      setProfile(updated);
+      onSaved?.();
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      alert('Error uploading file');
+    }
+  };
+
+  return (
+    <form
+      className="create-profile-form"
+      onSubmit={handleUpload}
+      encType="multipart/form-data"
+    >
+      <div className="ProfileHeader">
+        {preview || profile?.avatarUrl ? (
+          <img src={preview ?? profile!.avatarUrl!} alt="Avatar" className="avatar" />
+        ) : (
+          <div className="avatar-placeholder">
+            <FaUser />
+          </div>
+        )}
+        <div className="avatar-actions">
+          <label className="upload-btn" htmlFor="avatar-upload">Change</label>
+          <input
+            id="avatar-upload"
+            type="file"
+            onChange={(e) => {
+              const f = e.target.files?.[0] || null;
+              setFile(f);
+              setPreview(f ? URL.createObjectURL(f) : null);
+            }}
+          />
+          <button
+            type="button"
+            className="remove-btn"
+            onClick={async () => {
+              const updated = await updateProfile({ avatarUrl: null });
+              setProfile(updated);
+              setPreview(null);
+              setFile(null);
+            }}
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+      <label htmlFor="name">
+        Name <small>(Optional)</small>
+      </label>
+      <input
+        type="text"
+        id="name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Name"
+      />
+      <label htmlFor="age">
+        Age <small>(optional)</small>
+      </label>
+      <input
+        type="number"
+        id="age"
+        value={age}
+        onChange={(e) => setAge(Number(e.target.value))}
+        placeholder="Age"
+      />
+
+      <button type="submit">Save</button>
+    </form>
+  );
+}

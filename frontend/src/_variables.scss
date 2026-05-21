@@ -1,0 +1,23 @@
+$main-font: Inter, Sans-serif;
+
+$bg-primary: #0f0f0f; // main page background
+$bg-surface: #1a1a1a; // cards, panels
+$bg-elevated: #242424; // inputs, hover states
+
+// Text
+$text-primary: #f0f0f0; // headings, main text
+$text-secondary: #a0a0a0; // labels, subtitles
+$text-muted: #606060; // placeholders, disabled
+
+// Accent
+$accent: #e63946; // red — buttons, highlights
+$accent-hover: #c1121f; // darker red on hover
+
+// Utility
+$border: #2e2e2e; // dividers, card borders
+$success: #4caf50; // confirmation, completed
+$warning: #ff9800; // caution states
+
+// Widths
+$max-width: 480px; // content never gets wider than this
+$content-padding: 1rem; // side padding on mobile

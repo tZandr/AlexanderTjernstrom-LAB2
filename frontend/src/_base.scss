@@ -1,0 +1,21 @@
+@use 'variables' as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #080808;
+}
+
+#content {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 $content-padding;
+  background-color: $bg-primary;
+  color: $text-primary;
+  font-family: $main-font;
+  height: 100vh;
+}

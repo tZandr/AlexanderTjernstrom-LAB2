@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Workouts from './pages/Workouts';
 import ActiveWorkout from './pages/ActiveWorkout';
+import Settings from './pages/Settings';
+import History from './pages/History';
 
 export const router = createBrowserRouter([
   {
@@ -19,12 +21,20 @@ export const router = createBrowserRouter([
       },
       {
         path: '/workouts',
-        element: <Workouts />
+        element: <Workouts />,
       },
       {
         path: '/workouts/:id',
-        element: <ActiveWorkout />
-      }
+        element: <ActiveWorkout />,
+      },
+      {
+        path: '/settings',
+        element: <Settings />,
+      },
+      {
+        path: '/history',
+        element: <History />,
+      },
     ],
   },
 ]);
