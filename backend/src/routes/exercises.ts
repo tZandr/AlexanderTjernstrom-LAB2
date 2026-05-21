@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
 // Get all exercises
 router.get('/', async (req, res) => {
   try {
-    const exercises = await Exercise.find();
+    const exercises = await Exercise.find().sort({ name: 1 });
     res.status(200).json(exercises);
   } catch (error) {
     res.status(404).json({ message: 'Exercises not found' });

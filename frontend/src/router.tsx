@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
-import Workouts from './pages/Workouts';
+import Exercises from './pages/Exercises';
 import ActiveWorkout from './pages/ActiveWorkout';
 import Settings from './pages/Settings';
 import History from './pages/History';
@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/workouts',
-        element: <Workouts />,
+        element: <Exercises />,
       },
       {
         path: '/workouts/:id',

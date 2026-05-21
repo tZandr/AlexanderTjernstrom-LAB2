@@ -2,15 +2,15 @@ import { Schema, model } from 'mongoose';
 
 export interface IExercise {
   name: string;
-  description: string;
+  muscleGroups: string[];
   category: string[];
 }
 
 const exerciseSchema = new Schema<IExercise>(
   {
     name: { type: String, required: true },
-    description: { type: String },
-    category: { type: [String], required: true },
+    muscleGroups: { type: [String], default: [] },
+    category: { type: [String], default: [] },
   },
   { timestamps: true },
 );

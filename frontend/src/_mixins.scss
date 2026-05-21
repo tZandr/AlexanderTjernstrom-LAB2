@@ -1,0 +1,46 @@
+@use 'variables' as *;
+@use 'sass:map';
+
+// Mixins
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin btn-base($color: $text-secondary) {
+  background-color: transparent;
+  border: 1px solid $border;
+  border-radius: 8px;
+  color: $color;
+  cursor: pointer;
+  &:hover {
+    border-color: $accent;
+    color: $accent;
+  }
+}
+
+@mixin circle($size) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  border: 2px solid $border;
+  flex-shrink: 0;
+}
+
+// Placeholders
+
+%card {
+  background-color: $bg-surface;
+  border: 1px solid $border;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+// Maps
+
+$btn-variants: (
+  'success': $success,
+  'danger': $accent,
+);
